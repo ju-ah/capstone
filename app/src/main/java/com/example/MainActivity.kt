@@ -1,4 +1,4 @@
-package com.example.todaydrawings
+package com.example
 
 import android.os.Bundle
 import android.view.Menu
@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import com.example.todaydrawings.R
 import com.example.todaydrawings.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

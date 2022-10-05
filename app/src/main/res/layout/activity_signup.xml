@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:background="#ffffff"
     android:layout_margin="20dp"
-    android:layout_gravity="bottom"
-    android:theme="@style/Theme.Capstone">
+    android:layout_gravity="bottom">
 
 
     <LinearLayout
@@ -89,7 +88,7 @@
 
                     android:ems="10"
                     android:hint=" 이메일"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:text="" />
 
 
