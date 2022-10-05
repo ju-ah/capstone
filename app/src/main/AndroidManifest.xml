@@ -10,10 +10,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Capstone"
+        android:theme="@style/Theme.TodayDrawings"
         tools:targetApi="31">
+
         <activity
-            android:name="com.example.vellog_login.Login"
+            android:name="com.example.Login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +27,9 @@
                 android:value="" />
         </activity>
 
-        <activity android:name="com.example.vellog_login.Signup"/>
+
+        <activity android:name="com.example.Signup"/>
+        <activity android:name="com.example.MainActivity"/>
     </application>
 
 </manifest>
