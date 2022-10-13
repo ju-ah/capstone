@@ -47,7 +47,7 @@ class Login : AppCompatActivity() {
         email = findViewById(R.id.editEmail)
 
         //xml의 비번 아이디 연결
-        password = findViewById(R.id.ediPassword)
+        password = findViewById(R.id.editPassword)
 
 
         loginBtn=findViewById(R.id.loginbutton)
