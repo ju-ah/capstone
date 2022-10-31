@@ -65,7 +65,7 @@ class Login : AppCompatActivity() {
                 if (task.isSuccessful) {
                     //로그인 처리를 해주면 됨!
                     Toast.makeText(this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show()
-                    //메인액티비티로 이동
+                    //'메인액티비티'로 이동
                     startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 } else {

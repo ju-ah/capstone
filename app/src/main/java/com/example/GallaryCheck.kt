@@ -1,7 +1,6 @@
 package com.example
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
-import android.app.appsearch.SetSchemaRequest.READ_EXTERNAL_STORAGE
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.PackageManager
@@ -12,21 +11,21 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todaydrawings.Manifest
+
 
 class GallaryCheck {
     @RequiresApi(api = Build.VERSION_CODES.M)
     //권한 체크 하기
     fun checkPermission(activity: AppCompatActivity): Boolean {
         val isPermission =
-            ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE)
+            ActivityCompat.checkSelfPermission(activity,READ_EXTERNAL_STORAGE)
         return if (isPermission == PackageManager.PERMISSION_DENIED) {
             val b = AlertDialog.Builder(activity)
             b.setMessage("이미지를 등록하기위해선 저장소 읽기 권한이 필요합니다. 허용하시겠습니까?")
 
             b.setPositiveButton("yes") { dialogInterface: DialogInterface?, i: Int ->
                 activity.requestPermissions(
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    arrayOf(READ_EXTERNAL_STORAGE),
                     0x01
                 )
             }
