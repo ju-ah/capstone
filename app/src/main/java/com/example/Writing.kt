@@ -12,34 +12,39 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.MultiImageAdapter
 import com.example.todaydrawings.R
+import kotlinx.android.synthetic.main.activity_writing.*
 import java.util.ArrayList
 
 class Writing : AppCompatActivity() {
     // 이미지 데이터 리스트
     var list = ArrayList<Uri>()
     val adapter = MultiImageAdapter(list, this)
-    lateinit var add:Button
+    lateinit var pick: Button
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint("MissingInflatedId", "IntentReset")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_writing)
 
-        add=findViewById(R.id.add)
+        pick = findViewById(R.id.pick)
 
+        pick.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+            intent.action = Intent.ACTION_GET_CONTENT
 
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.data = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-        intent.action = Intent.ACTION_GET_CONTENT
-
-        startActivityForResult(intent, 200)
+            //startActivityForeResult 메소드는 startActivity() 와 다르게 콜백 메소드를 부름
+            //두번째 인자값 (200)이 requestCode가 되고 onActivityResult() 에서 받아온 data를 판별해 작업
+            startActivityForResult(intent, 200)
+        }
 
 
         // 리사이클러뷰
-        var recyclerview = findViewById<RecyclerView>(R.id.recyclerView)
+        val recyclerview = findViewById<RecyclerView>(R.id.pickedImg)
 
-        val layoutManager = LinearLayoutManager(this)
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerview.layoutManager = layoutManager
         recyclerview.adapter = adapter
 
@@ -77,6 +82,10 @@ class Writing : AppCompatActivity() {
             }
             adapter.notifyDataSetChanged()
 
+        } else {
+            Toast.makeText(this, "잘못된 접근입니다", Toast.LENGTH_SHORT).show()
+            return
         }
+
     }
 }
