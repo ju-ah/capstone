@@ -1,5 +1,6 @@
 package com.example
 
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.content.Context
 import android.content.DialogInterface
 import android.content.pm.PackageManager
@@ -11,18 +12,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 
-class GalleryCheck : AppCompatActivity() {
+
+class GallaryCheck {
     @RequiresApi(api = Build.VERSION_CODES.M)
     //권한 체크 하기
     fun checkPermission(activity: AppCompatActivity): Boolean {
         val isPermission =
-            ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            ActivityCompat.checkSelfPermission(activity,READ_EXTERNAL_STORAGE)
         return if (isPermission == PackageManager.PERMISSION_DENIED) {
             val b = AlertDialog.Builder(activity)
             b.setMessage("이미지를 등록하기위해선 저장소 읽기 권한이 필요합니다. 허용하시겠습니까?")
 
             b.setPositiveButton("yes") { dialogInterface: DialogInterface?, i: Int ->
-                activity.requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+                activity.requestPermissions(
+                    arrayOf(READ_EXTERNAL_STORAGE),
                     0x01
                 )
             }
@@ -40,9 +43,25 @@ class GalleryCheck : AppCompatActivity() {
         fun setCursor(cursor: Cursor)
         fun showDialog(context: Context, cursor: Cursor)
 
-
+        companion object{
+            fun newInstance() : CursorVisualizer {
+                return CursorVisualizerImpl()
+            }
+        }
     }
 }
 
+class CursorVisualizerImpl : GallaryCheck.CursorVisualizer {
+    override fun attachRecyclerView(recyclerView: RecyclerView) {
+        TODO("Not yet implemented")
+    }
 
+    override fun setCursor(cursor: Cursor) {
+        TODO("Not yet implemented")
+    }
 
+    override fun showDialog(context: Context, cursor: Cursor) {
+        TODO("Not yet implemented")
+    }
+
+}
