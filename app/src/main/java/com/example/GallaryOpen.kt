@@ -31,12 +31,9 @@ class GallaryOpen : AppCompatActivity() {
         gallaryBtn = findViewById(R.id.signUp)
         //기능
         gallaryBtn.setOnClickListener {
-            val intent = Intent(this, GallaryCollect::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, GallaryCollect::class.java)
+//            startActivity(intent)
         }
     }
 }
 
-class GallaryCollect {
-
-}

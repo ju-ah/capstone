@@ -1,5 +1,6 @@
 package com.example
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import com.google.android.material.snackbar.Snackbar
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         binding.appBarMain.extendedFab.setOnClickListener { view ->
             Snackbar.make(view, "글쓰기 화면으로 이동해야 함", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
+
+            startActivity(Intent(this,GalleryCheck::class.java))
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
