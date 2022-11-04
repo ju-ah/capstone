@@ -14,7 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.todaydrawings.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+
 
 class Signup : AppCompatActivity() {
     lateinit var back: TextView
@@ -28,14 +31,20 @@ class Signup : AppCompatActivity() {
 
     private var _binding: Login? = null
     private val binding get() = _binding!!
+    private lateinit var database: DatabaseReference
+
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
+
+
+
+
         //Firebase auth 초기화하기
-        auth= Firebase.auth
+        auth = Firebase.auth
         //뒤로 가기 버튼
         back = findViewById(R.id.back)
         back.setOnClickListener { this.onBackPressed() }
@@ -80,20 +89,39 @@ class Signup : AppCompatActivity() {
                 } else {
                     if (task.isSuccessful) {
                         Toast.makeText(this, "회원가입에 성공했습니다!", Toast.LENGTH_SHORT).show()
-                        //로그인 화면 이동
-                        val intent = Intent(this, Login::class.java)
-                        startActivity(intent)
-                        // 액티비티 종료
-                        finish()
+
+
+                        //uid
+                        val currentFirebaseUser = FirebaseAuth.getInstance().currentUser
+                        Toast.makeText(this, "" + currentFirebaseUser!!.uid, Toast.LENGTH_SHORT)
+                            .show();
+
+                        //함수 호출
+                        RegisterUser(email, currentFirebaseUser.uid, nickname)
+
+
+                    } else {
+                        Toast.makeText(this, "회원가입에 실패했습니다!", Toast.LENGTH_SHORT).show()
+                        Log.d("signup", task.exception?.message.toString())
                     }
-                    Toast.makeText(this, "회원가입에 실패했습니다!", Toast.LENGTH_SHORT).show()
-                    Log.d("signup", task.exception?.message.toString())
 
 
                 }
             }
     }
+
+
 }
+
+//함수 정의
+private fun RegisterUser(email: String, uid: String, nickname: String) {
+    val user = Users(uid,nickname, email)
+    val database = Firebase.database.reference
+    database.child("Users").child(uid).setValue(user) //setValue는 child의 값을 지정
+}
+
+
+
 
 
 
